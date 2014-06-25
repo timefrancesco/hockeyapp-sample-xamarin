@@ -1,4 +1,4 @@
 hockeyapp-sample-xamarin
 ========================
 
-A sample on how to implement hockeyapp in xamarin with custom log reports
+A sample on how to implement hockeyapp in xamarin-iOS with custom log reports
