@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 using HockeyApp;
 using System.Threading.Tasks;
 using System.IO;
@@ -22,8 +22,7 @@ namespace HockeyAppSampleiOS
 		UIWindow window;
 
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
-		{
-			
+		{			
 			InitHockeyApp();
 			
 			window = new UIWindow (UIScreen.MainScreen.Bounds);
@@ -31,10 +30,8 @@ namespace HockeyAppSampleiOS
 			homeViewController = new HomeViewController ();
 			navController = new UINavigationController (homeViewController);
 			window.RootViewController = navController;
-			
-			// make the window visible
-			window.MakeKeyAndVisible ();
 
+			window.MakeKeyAndVisible ();
 			return true;
 		}
 		
@@ -55,18 +52,16 @@ namespace HockeyAppSampleiOS
 
 				//Get the shared instance
 				var manager = BITHockeyManager.SharedHockeyManager;
+				BITHockeyManager.SharedHockeyManager.ConfigureWithIdentifier("betaID","liveID",new CustomCrashDelegate());
 
 				//Configure it to use our APP_ID
 				manager.Configure (HOCKEYAPP_APPID);
-				CustomCrashDelegate crashDelegate = new CustomCrashDelegate();
-				
-				manager.CrashManager.Delegate = crashDelegate;
+
+				//manager.CrashManager.Delegate = crashDelegate;
 				manager.CrashManager.CrashManagerStatus = BITCrashManagerStatus.AutoSend;
 				
 				//Start the manager
-				manager.StartManager ();
-
-				
+				manager.StartManager ();				
 				
 				//Authenticate (there are other authentication options)
 				manager.Authenticator.AuthenticateInstallation ();
